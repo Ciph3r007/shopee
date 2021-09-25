@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { Disclosure } from "@headlessui/react";
 import { ShoppingCartIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
 import CartSideBar from "./CartSidebar";
@@ -37,16 +37,18 @@ const NavBar = ({ cartItems, onRemove }) => {
                 </div>
                 <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
                   <div className="flex-shrink-0 flex items-center">
-                    <img
-                      className="block lg:hidden h-8 w-auto"
-                      src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg"
-                      alt="Workflow"
-                    />
-                    <img
-                      className="hidden lg:block h-8 w-auto"
-                      src="https://tailwindui.com/img/logos/workflow-logo-indigo-500-mark-white-text.svg"
-                      alt="Workflow"
-                    />
+                    <Link exact to="/">
+                      <img
+                        className="block lg:hidden h-8 w-auto p-1"
+                        src="https://i.ibb.co/vjGVTRX/image-1.png"
+                        alt="Workflow"
+                      />
+                      <img
+                        className="hidden lg:block h-8 w-auto p-1 mr-10"
+                        src="https://i.ibb.co/vjGVTRX/image-1.png"
+                        alt="Workflow"
+                      />
+                    </Link>
                   </div>
                   <div className="hidden sm:block sm:ml-6">
                     <div className="flex space-x-4">
