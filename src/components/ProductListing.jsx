@@ -26,7 +26,9 @@ const ProductListing = ({ products }) => {
                       {product.title}
                     </a>
                   </h3>
-                  <p className="mt-1 text-sm text-gray-500">{"COLOR"}</p>
+                  <p className="mt-1 text-sm text-gray-500">
+                    {product.category.toUpperCase()}
+                  </p>
                 </div>
                 <p className="text-sm font-medium text-gray-900">
                   ${product.price}
