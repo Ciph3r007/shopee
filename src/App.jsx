@@ -2,7 +2,6 @@ import "./App.css";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Redirect, Route, Switch } from "react-router-dom";
-import CartSideBar from "./components/CartSidebar";
 import NavBar from "./components/NavBar";
 import ProductListing from "./components/ProductListing";
 import About from "./components/About";
@@ -23,6 +22,7 @@ function App() {
     },
     // More products...
   ]);
+  const [cartItems, setCartItems] = useState([]);
 
   useEffect(() => {
     async function getData() {
@@ -33,9 +33,28 @@ function App() {
     getData();
   }, []);
 
+  const handleIncrement = (product) => {
+    const index = products.indexOf(product);
+    products[index].inCart = (products[index].inCart || 0) + 1;
+    setProducts([...products]);
+
+    if (cartItems.indexOf(product) === -1) cartItems.push(product);
+    setCartItems([...cartItems]);
+    console.log(cartItems);
+  };
+
+  const handleDecrement = (product) => {
+    const index = products.indexOf(product);
+    products[index].inCart = products[index].inCart - 1;
+    setProducts([...products]);
+
+    if (product.inCart === 0)
+      setCartItems(cartItems.filter((item) => item.id !== product.id));
+  };
+
   return (
     <>
-      <NavBar />
+      <NavBar cartItems={cartItems} />
       <Switch>
         <Route exact path="/about" component={About} />
         <Route exact path="/contact" component={Contact} />
@@ -45,8 +64,11 @@ function App() {
           path="/"
           render={() => (
             <>
-              <CartSideBar />
-              <ProductListing products={products} />
+              <ProductListing
+                products={products}
+                onIncrement={handleIncrement}
+                onDecrement={handleDecrement}
+              />
             </>
           )}
         />
