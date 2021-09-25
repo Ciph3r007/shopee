@@ -52,9 +52,14 @@ function App() {
       setCartItems(cartItems.filter((item) => item.id !== product.id));
   };
 
+  const handleRemove = (product) => {
+    product.inCart = 0;
+    setCartItems(cartItems.filter((item) => item.id !== product.id));
+  };
+
   return (
     <>
-      <NavBar cartItems={cartItems} />
+      <NavBar cartItems={cartItems} onRemove={handleRemove} />
       <Switch>
         <Route exact path="/about" component={About} />
         <Route exact path="/contact" component={Contact} />

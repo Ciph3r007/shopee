@@ -4,7 +4,7 @@ import { Disclosure } from "@headlessui/react";
 import { ShoppingCartIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
 import CartSideBar from "./CartSidebar";
 
-const NavBar = ({ cartItems }) => {
+const NavBar = ({ cartItems, onRemove }) => {
   const navigation = [
     { name: "Home", href: "/", current: false },
     { name: "About", href: "/about", current: false },
@@ -69,12 +69,17 @@ const NavBar = ({ cartItems }) => {
                     type="button"
                     className="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
                   >
-                    <span className="sr-only">View notifications</span>
+                    <span className="sr-only">Shopping Cart</span>
                     <ShoppingCartIcon
                       onClick={handleCartButton}
-                      className="h-6 w-6"
+                      className="h-8 w-8"
                       aria-hidden="true"
                     />
+                    {cartItems.length !== 0 ? (
+                      <span className="absolute top-11 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-blue-100 transform translate-x-1/2 -translate-y-1/2 bg-blue-600 rounded-full">
+                        {cartItems.length}
+                      </span>
+                    ) : null}
                   </button>
                 </div>
               </div>
@@ -102,6 +107,7 @@ const NavBar = ({ cartItems }) => {
         cartItems={cartItems}
         open={cartIsOpen}
         setOpen={setCartIsOpen}
+        onRemove={onRemove}
       />
     </>
   );

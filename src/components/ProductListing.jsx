@@ -13,7 +13,7 @@ const ProductListing = ({ products, onIncrement, onDecrement }) => {
           {products.map((product) => (
             <div key={product.id} className="relative">
               <div className="group">
-                <div className="w-full min-h-80 bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:h-80 lg:aspect-none shadow-lg">
+                <div className="w-full min-h-80 bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:h-80 lg:aspect-none shadow-xl">
                   <img
                     src={product.image}
                     alt={product.title}
