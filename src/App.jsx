@@ -28,7 +28,6 @@ function App() {
     async function getData() {
       const { data } = await axios.get("https://fakestoreapi.com/products");
       setProducts(data);
-      console.log("Data loaded");
     }
     getData();
   }, []);
@@ -40,7 +39,6 @@ function App() {
 
     if (cartItems.indexOf(product) === -1) cartItems.push(product);
     setCartItems([...cartItems]);
-    console.log(cartItems);
   };
 
   const handleDecrement = (product) => {

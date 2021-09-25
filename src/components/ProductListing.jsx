@@ -6,7 +6,7 @@ const ProductListing = ({ products, onIncrement, onDecrement }) => {
     <div className="bg-white">
       <div className="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
         <h2 className="text-2xl font-extrabold tracking-tight text-gray-900">
-          Customers also purchased
+          Trending
         </h2>
 
         <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
@@ -37,23 +37,31 @@ const ProductListing = ({ products, onIncrement, onDecrement }) => {
                   </p>
                 </div>
               </div>
-              <div
-                className="flex justify-center items-center px-4 py-1 border border-transparent
-                                            rounded-md shadow-sm text-base font-medium text-gray-900 bg-gray-100 z-10"
-              >
-                <button
-                  onClick={() => onDecrement(product)}
-                  className="bg-indigo-700 text-white p-2 rounded-lg shadow-sm cursor-pointer hover:bg-indigo-400"
-                >
-                  <MinusIcon className="h-3 w-3" aria-hidden="true" />
-                </button>
-                <span className="mx-5">{product.inCart || 0}</span>
-                <button
-                  onClick={() => onIncrement(product)}
-                  className="bg-indigo-700 text-white p-2 rounded-lg shadow-sm cursor-pointer hover:bg-indigo-400"
-                >
-                  <PlusIcon className="h-3 w-3" aria-hidden="true" />
-                </button>
+              <div className="flex justify-center items-center border border-transparent rounded-md shadow-sm text-base font-medium text-gray-900">
+                {product.inCart ? (
+                  <>
+                    <button
+                      onClick={() => onDecrement(product)}
+                      className="bg-blue-700 text-white p-2 rounded-lg shadow-sm cursor-pointer hover:bg-blue-400"
+                    >
+                      <MinusIcon className="h-3 w-3" aria-hidden="true" />
+                    </button>
+                    <span className="mx-5">{product.inCart || 0}</span>
+                    <button
+                      onClick={() => onIncrement(product)}
+                      className="bg-blue-700 text-white p-2 rounded-lg shadow-sm cursor-pointer hover:bg-blue-400"
+                    >
+                      <PlusIcon className="h-3 w-3" aria-hidden="true" />
+                    </button>
+                  </>
+                ) : (
+                  <button
+                    onClick={() => onIncrement(product)}
+                    className="flex justify-center items-center mx-2 my-2 px-6 py-2 border border-transparent w-full rounded-md shadow-sm text-base font-medium text-white cursor-pointer bg-indigo-700 hover:bg-indigo-800"
+                  >
+                    Add to Cart
+                  </button>
+                )}
               </div>
             </div>
           ))}
