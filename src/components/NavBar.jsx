@@ -1,15 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { Disclosure } from "@headlessui/react";
 import { ShoppingCartIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
 import CartSideBar from "./CartSidebar";
+import { Context } from "../context/ContextProvider";
 
-const NavBar = ({ cartItems, totalItems, inCart, onRemove }) => {
+const NavBar = () => {
   const navigation = [
     { name: "Home", href: "/", current: false },
     { name: "About", href: "/about", current: false },
     { name: "Contact", href: "/contact", current: false },
   ];
+  const { totalItems } = useContext(Context);
   const [cartIsOpen, setCartIsOpen] = useState(false);
 
   const handleCartButton = () => {
@@ -37,7 +39,7 @@ const NavBar = ({ cartItems, totalItems, inCart, onRemove }) => {
                 </div>
                 <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
                   <div className="flex-shrink-0 flex items-center">
-                    <Link exact to="/">
+                    <Link to="/">
                       <img
                         className="block lg:hidden h-8 w-auto p-1"
                         src="https://i.ibb.co/vjGVTRX/image-1.png"
@@ -55,8 +57,8 @@ const NavBar = ({ cartItems, totalItems, inCart, onRemove }) => {
                       {navigation.map((item) => (
                         <NavLink
                           key={item.name}
+                          exact
                           to={item.href}
-                          exact={true}
                           activeClassName="block px-3 py-2 rounded-md text-base font-medium bg-gray-900 text-white"
                           className="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
                         >
@@ -89,8 +91,8 @@ const NavBar = ({ cartItems, totalItems, inCart, onRemove }) => {
                 {navigation.map((item) => (
                   <NavLink
                     key={item.name}
+                    exact
                     to={item.href}
-                    exact={true}
                     activeClassName="block px-3 py-2 rounded-md text-base font-medium bg-gray-900 text-white"
                     className="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
                   >
@@ -102,13 +104,7 @@ const NavBar = ({ cartItems, totalItems, inCart, onRemove }) => {
           </>
         )}
       </Disclosure>
-      <CartSideBar
-        cartItems={cartItems}
-        inCart={inCart}
-        open={cartIsOpen}
-        setOpen={setCartIsOpen}
-        onRemove={onRemove}
-      />
+      <CartSideBar open={cartIsOpen} setOpen={setCartIsOpen} />
     </>
   );
 };

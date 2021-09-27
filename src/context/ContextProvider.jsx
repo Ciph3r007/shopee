@@ -1,9 +1,45 @@
-import { createContext, useEffect } from "react";
+import { createContext, useEffect, useState } from "react";
 import axios from "axios";
 
 export const Context = createContext();
 
 const ContextProvider = (props) => {
+  const [cartItems, setCartItems] = useState([]);
+  const [inCart, setInCart] = useState({});
+  const [totalItems, setTotalItems] = useState(0);
+
+  const handleIncrement = (product) => {
+    if (!inCart[product.id]) {
+      setTotalItems(totalItems + 1);
+      cartItems.push(product);
+      setCartItems([...cartItems]);
+    }
+
+    inCart[product.id] = (inCart[product.id] || 0) + 1;
+    setInCart({ ...inCart });
+
+    // Why doesn't it work???
+    // if (cartItems.indexOf(product) === -1) cartItems.push(product);
+    // setCartItems([...cartItems]);
+  };
+
+  const handleDecrement = (product) => {
+    if (inCart[product.id] === 0) console.log("Decrement on 0!");
+    inCart[product.id] -= 1;
+    setInCart({ ...inCart });
+
+    if (inCart[product.id] === 0) {
+      setTotalItems(totalItems - 1);
+      setCartItems(cartItems.filter((item) => item.id !== product.id));
+    }
+  };
+
+  const handleRemove = (product) => {
+    inCart[product.id] = 0;
+    setTotalItems(totalItems - 1);
+    setCartItems(cartItems.filter((item) => item.id !== product.id));
+  };
+
   useEffect(() => {
     async function getData() {
       const { data } = await axios.get("https://fakestoreapi.com/products");
@@ -14,7 +50,21 @@ const ContextProvider = (props) => {
 
   const products = JSON.parse(localStorage.getItem("products"));
 
-  return <Context.Provider value={products}>{props.children}</Context.Provider>;
+  return (
+    <Context.Provider
+      value={{
+        products,
+        cartItems,
+        inCart,
+        totalItems,
+        handleIncrement,
+        handleDecrement,
+        handleRemove,
+      }}
+    >
+      {props.children}
+    </Context.Provider>
+  );
 };
 
 export default ContextProvider;

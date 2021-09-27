@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Fragment } from "react";
+import { Link } from "react-router-dom";
 import { Dialog, Transition } from "@headlessui/react";
 import { XIcon } from "@heroicons/react/outline";
+import { Context } from "../context/ContextProvider";
 
-const CartSideBar = ({ cartItems, inCart, open, setOpen, onRemove }) => {
+const CartSideBar = ({ open, setOpen }) => {
+  const { cartItems, inCart, handleRemove: onRemove } = useContext(Context);
+
   return (
     <Transition.Root show={open} as={Fragment}>
       <Dialog
@@ -55,10 +59,7 @@ const CartSideBar = ({ cartItems, inCart, open, setOpen, onRemove }) => {
 
                     <div className="mt-8">
                       <div className="flow-root">
-                        <ul
-                          role="list"
-                          className="-my-6 divide-y divide-gray-200"
-                        >
+                        <ul className="-my-6 divide-y divide-gray-200">
                           {cartItems.map((product) => (
                             <li key={product.id} className="py-6 flex">
                               <div className="flex-shrink-0 w-24 h-24 border border-gray-200 rounded-md overflow-hidden">
@@ -111,23 +112,25 @@ const CartSideBar = ({ cartItems, inCart, open, setOpen, onRemove }) => {
                       <p>Subtotal</p>
                       <p>
                         $
-                        {cartItems.reduce(
-                          (accumulator, current) =>
-                            accumulator + current.price * current.inCart,
-                          0
-                        )}
+                        {cartItems
+                          .reduce(
+                            (accumulator, current) =>
+                              accumulator + current.price * inCart[current.id],
+                            0
+                          )
+                          .toFixed(2)}
                       </p>
                     </div>
                     <p className="mt-0.5 text-sm text-gray-500 italic">
                       Shipping and taxes calculated at checkout.
                     </p>
                     <div className="mt-6">
-                      <a
-                        href="#"
+                      <Link
+                        to="/checkout"
                         className="flex justify-center items-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"
                       >
                         Checkout
-                      </a>
+                      </Link>
                     </div>
                     <div className="mt-6 flex justify-center text-sm text-center text-gray-500">
                       <p>
