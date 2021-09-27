@@ -3,7 +3,7 @@ import { Fragment } from "react";
 import { Link } from "react-router-dom";
 import { Dialog, Transition } from "@headlessui/react";
 import { XIcon } from "@heroicons/react/outline";
-import { Context } from "../context/ContextProvider";
+import { Context } from "../../context/ContextProvider";
 
 const CartSideBar = ({ open, setOpen }) => {
   const { cartItems, inCart, handleRemove: onRemove } = useContext(Context);

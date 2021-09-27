@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { PlusIcon, MinusIcon } from "@heroicons/react/outline";
-import { Context } from "../context/ContextProvider";
+import { Context } from "../../context/ContextProvider";
 
 const ProductListing = () => {
   const {

@@ -2,8 +2,8 @@ import React, { useState, useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { Disclosure } from "@headlessui/react";
 import { ShoppingCartIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
-import CartSideBar from "./CartSidebar";
-import { Context } from "../context/ContextProvider";
+import CartSideBar from "../cartSidebar/CartSidebar";
+import { Context } from "../../context/ContextProvider";
 
 const NavBar = () => {
   const navigation = [
@@ -13,11 +13,6 @@ const NavBar = () => {
   ];
   const { totalItems } = useContext(Context);
   const [cartIsOpen, setCartIsOpen] = useState(false);
-
-  const handleCartButton = () => {
-    setCartIsOpen(!cartIsOpen);
-    console.log(cartIsOpen);
-  };
 
   return (
     <>
@@ -71,7 +66,7 @@ const NavBar = () => {
                 <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                   <button
                     type="button"
-                    onClick={handleCartButton}
+                    onClick={() => setCartIsOpen(!cartIsOpen)}
                     className="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
                   >
                     <span className="sr-only">Shopping Cart</span>
