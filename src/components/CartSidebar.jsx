@@ -3,7 +3,7 @@ import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { XIcon } from "@heroicons/react/outline";
 
-const CartSideBar = ({ cartItems, open, setOpen, onRemove }) => {
+const CartSideBar = ({ cartItems, inCart, open, setOpen, onRemove }) => {
   return (
     <Transition.Root show={open} as={Fragment}>
       <Dialog
@@ -85,7 +85,7 @@ const CartSideBar = ({ cartItems, open, setOpen, onRemove }) => {
                                 </div>
                                 <div className="flex-1 flex items-end justify-between text-sm">
                                   <p className="text-gray-500 border p-1">
-                                    Qty. {product.inCart}
+                                    Qty. {inCart[product.id]}
                                   </p>
 
                                   <div className="flex">

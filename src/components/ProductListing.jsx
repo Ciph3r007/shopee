@@ -1,7 +1,7 @@
 import React from "react";
 import { PlusIcon, MinusIcon } from "@heroicons/react/outline";
 
-const ProductListing = ({ products, onIncrement, onDecrement }) => {
+const ProductListing = ({ products, inCart, onIncrement, onDecrement }) => {
   return (
     <div className="bg-white max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
       <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
@@ -36,7 +36,7 @@ const ProductListing = ({ products, onIncrement, onDecrement }) => {
               </div>
             </div>
             <div className="flex justify-center items-center border border-transparent rounded-md shadow-sm text-base font-medium text-gray-900">
-              {product.inCart ? (
+              {inCart[product.id] ? (
                 <>
                   <button
                     onClick={() => onDecrement(product)}
@@ -44,7 +44,9 @@ const ProductListing = ({ products, onIncrement, onDecrement }) => {
                   >
                     <MinusIcon className="h-3 w-3" aria-hidden="true" />
                   </button>
-                  <span className="mx-5 text-xl">{product.inCart || 0}</span>
+                  <span className="mx-5 text-xl">
+                    {inCart[product.id] || 0}
+                  </span>
                   <button
                     onClick={() => onIncrement(product)}
                     className="bg-blue-700 text-white mx-2 my-3 px-6 py-2 rounded-lg shadow-sm cursor-pointer hover:bg-blue-400"
