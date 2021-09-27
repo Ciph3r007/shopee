@@ -48,7 +48,7 @@ const ProductListing = () => {
                 <>
                   <button
                     onClick={() => onDecrement(product)}
-                    className="bg-blue-700 text-white mx-2 my-2 px-6 py-2 rounded-lg shadow-sm cursor-pointer hover:bg-blue-400"
+                    className="text-white mx-2 my-2 px-6 py-2 rounded-lg shadow-sm cursor-pointer bg-indigo-700 hover:bg-indigo-800"
                   >
                     <MinusIcon className="h-3 w-3" aria-hidden="true" />
                   </button>
@@ -57,7 +57,7 @@ const ProductListing = () => {
                   </span>
                   <button
                     onClick={() => onIncrement(product)}
-                    className="bg-blue-700 text-white mx-2 my-3 px-6 py-2 rounded-lg shadow-sm cursor-pointer hover:bg-blue-400"
+                    className="text-white mx-2 my-3 px-6 py-2 rounded-lg shadow-sm cursor-pointer bg-indigo-700 hover:bg-indigo-800"
                   >
                     <PlusIcon className="h-3 w-3" aria-hidden="true" />
                   </button>

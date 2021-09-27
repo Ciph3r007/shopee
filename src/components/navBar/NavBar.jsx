@@ -72,7 +72,7 @@ const NavBar = () => {
                     <span className="sr-only">Shopping Cart</span>
                     <ShoppingCartIcon className="h-8 w-8" aria-hidden="true" />
                     {totalItems !== 0 ? (
-                      <span className="absolute top-11 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-blue-100 transform translate-x-1/2 -translate-y-1/2 bg-blue-600 rounded-full">
+                      <span className="absolute top-11 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-blue-100 transform translate-x-1/2 -translate-y-1/2 bg-indigo-600 rounded-full">
                         {totalItems}
                       </span>
                     ) : null}

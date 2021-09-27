@@ -40,6 +40,12 @@ const ContextProvider = (props) => {
     setCartItems(cartItems.filter((item) => item.id !== product.id));
   };
 
+  const handleEmpty = () => {
+    setInCart({});
+    setCartItems([]);
+    setTotalItems(0);
+  };
+
   useEffect(() => {
     async function getData() {
       const { data } = await axios.get("https://fakestoreapi.com/products");
@@ -60,6 +66,7 @@ const ContextProvider = (props) => {
         handleIncrement,
         handleDecrement,
         handleRemove,
+        handleEmpty,
       }}
     >
       {props.children}
