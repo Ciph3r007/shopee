@@ -63,10 +63,10 @@ const ContextProvider = (props) => {
         cartItems,
         inCart,
         totalItems,
-        handleIncrement,
-        handleDecrement,
-        handleRemove,
-        handleEmpty,
+        onIncrement: handleIncrement,
+        onDecrement: handleDecrement,
+        onRemove: handleRemove,
+        onEmpty: handleEmpty,
       }}
     >
       {props.children}

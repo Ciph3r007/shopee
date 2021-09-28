@@ -3,12 +3,7 @@ import { PlusIcon, MinusIcon } from "@heroicons/react/outline";
 import { Context } from "../../context/ContextProvider";
 
 const ProductListing = () => {
-  const {
-    products,
-    inCart,
-    handleIncrement: onIncrement,
-    handleDecrement: onDecrement,
-  } = useContext(Context);
+  const { products, inCart, onIncrement, onDecrement } = useContext(Context);
 
   return (
     <div className="bg-white max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">

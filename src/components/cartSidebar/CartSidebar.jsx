@@ -10,10 +10,11 @@ const CartSideBar = ({ open, setOpen }) => {
   const {
     cartItems,
     inCart,
-    handleIncrement: onIncrement,
-    handleDecrement: onDecrement,
-    handleRemove: onRemove,
-    handleEmpty: onEmpty,
+    totalItems,
+    onIncrement,
+    onDecrement,
+    onRemove,
+    onEmpty,
   } = useContext(Context);
 
   return (
@@ -96,9 +97,9 @@ const CartSideBar = ({ open, setOpen }) => {
                                   <div className="flex justify-center items-center border border-transparent rounded-md shadow-sm text-base font-medium text-gray-900">
                                     <button
                                       onClick={() => onDecrement(product)}
-                                      className={`text-white mx-1 my-2 px-3 py-1 rounded-lg shadow-sm cursor-pointer  ${
+                                      className={`text-white mx-1 my-2 px-3 py-1 rounded-lg shadow-sm   ${
                                         inCart[product.id] === 1
-                                          ? "bg-indigo-400"
+                                          ? "bg-indigo-400 cursor-default"
                                           : "bg-indigo-700 hover:bg-indigo-800"
                                       }`}
                                       disabled={inCart[product.id] === 1}
@@ -160,8 +161,16 @@ const CartSideBar = ({ open, setOpen }) => {
                     <div className="mt-6 grid grid-flow-row grid-cols-2 gap-2">
                       <Link
                         to="/checkout"
-                        className="flex justify-evenly items-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"
-                        onClick={() => setOpen(false)}
+                        className={`flex justify-evenly items-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white ${
+                          totalItems > 0
+                            ? "bg-indigo-600 hover:bg-indigo-700"
+                            : "bg-indigo-400 cursor-default"
+                        }`}
+                        onClick={
+                          totalItems > 0
+                            ? () => setOpen(false)
+                            : (e) => e.preventDefault()
+                        }
                       >
                         Checkout
                       </Link>
