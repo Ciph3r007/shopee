@@ -4,6 +4,7 @@ import axios from "axios";
 export const Context = createContext();
 
 const ContextProvider = (props) => {
+  const [products] = useState(JSON.parse(localStorage.getItem("products")));
   const [cartItems, setCartItems] = useState([]);
   const [inCart, setInCart] = useState({});
   const [totalItems, setTotalItems] = useState(0);
@@ -17,10 +18,6 @@ const ContextProvider = (props) => {
 
     inCart[product.id] = (inCart[product.id] || 0) + 1;
     setInCart({ ...inCart });
-
-    // Why doesn't it work???
-    // if (cartItems.indexOf(product) === -1) cartItems.push(product);
-    // setCartItems([...cartItems]);
   };
 
   const handleDecrement = (product) => {
@@ -53,8 +50,6 @@ const ContextProvider = (props) => {
     }
     if (!localStorage.products) getData();
   }, []);
-
-  const products = JSON.parse(localStorage.getItem("products"));
 
   return (
     <Context.Provider
