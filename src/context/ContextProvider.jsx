@@ -4,10 +4,19 @@ import axios from "axios";
 export const Context = createContext();
 
 const ContextProvider = (props) => {
-  const [products] = useState(JSON.parse(localStorage.getItem("products")));
+  const [products, setProducts] = useState([]);
   const [cartItems, setCartItems] = useState([]);
   const [inCart, setInCart] = useState({});
   const [totalItems, setTotalItems] = useState(0);
+
+  useEffect(() => {
+    async function getData() {
+      const { data } = await axios.get("https://fakestoreapi.com/products");
+      localStorage.setItem("products", JSON.stringify(data));
+      setProducts(JSON.parse(localStorage.products));
+    }
+    if (!localStorage.products) getData();
+  }, []);
 
   const handleIncrement = (product) => {
     if (!inCart[product.id]) {
@@ -42,14 +51,6 @@ const ContextProvider = (props) => {
     setCartItems([]);
     setTotalItems(0);
   };
-
-  useEffect(() => {
-    async function getData() {
-      const { data } = await axios.get("https://fakestoreapi.com/products");
-      localStorage.setItem("products", JSON.stringify(data));
-    }
-    if (!localStorage.products) getData();
-  }, []);
 
   return (
     <Context.Provider
