@@ -4,7 +4,9 @@ import axios from "axios";
 export const Context = createContext();
 
 const ContextProvider = (props) => {
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState(
+    JSON.parse(localStorage.getItem("products"))
+  );
   const [cartItems, setCartItems] = useState([]);
   const [inCart, setInCart] = useState({});
   const [totalItems, setTotalItems] = useState(0);
@@ -15,7 +17,10 @@ const ContextProvider = (props) => {
       localStorage.setItem("products", JSON.stringify(data));
       setProducts(JSON.parse(localStorage.products));
     }
-    if (!localStorage.products) getData();
+
+    if (!localStorage.getItem("products")) {
+      getData();
+    }
   }, []);
 
   const handleIncrement = (product) => {
